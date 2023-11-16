@@ -31,7 +31,7 @@ export default function Combos() {
               <h3 className="text-green text-lg">12% off</h3>
               
             </div>
-            <div cla>
+            <div>
               <h></h>
             </div>
           </div>
