@@ -1,3 +1,4 @@
+import Store199 from "@/components/home_page/199store";
 import Combos from "@/components/home_page/combos";
 import MainItems from "@/components/home_page/main_items";
 
@@ -29,7 +30,18 @@ export default function Home() {
             </div>
             <div className="p-6">
               <h2 className="font-bold text-xl">Under Rs. 199 Store</h2>
-              <h4 className="text-lightGray text-md">Stay Meativated On A Budget!</h4>
+              <h4 className="text-lightGray text-md">
+                Stay Meativated On A Budget!
+              </h4>
+            </div>
+            <div>
+              <Store199 />
+            </div>
+            <div className="p-6">
+              <h2 className="font-bold text-xl">Fresh at FreshSlice!</h2>
+              <h4 className="text-lightGray text-md">
+                Handpicked Assortment Just For You
+              </h4>
             </div>
             
           </div>

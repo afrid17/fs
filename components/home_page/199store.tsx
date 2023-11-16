@@ -9,12 +9,16 @@ export default function Store199() {
     infinite: false,
   }
   let store199 = [
-    [""]
+    ["199_store/1991.webp","Chicken Curry Cut - Small Pieces","500g","| 12-18 Pieces","| Serves 4","168","179",'6% Off'],
+    ["199_store/1992.webp","Chicken Boneless - Mini Bites","250g","| 20-30 Pieces","| Serves 4","174","205",'15% Off'],
+    ["199_store/1993.webp","Chicken Curry Cut - Large Pieces","500g","| 8-10 Pieces","| Serves 4","168","179",'6% Off'],
+    ["199_store/1994.webp","Farm Fresh Classic Eggs - Pack Of 12","12 Pieces","","","145","170",'15% Off'],
+    ["199_store/1995.webp","Chicken Liver","350g","| 7-9 Pieces","| Serves 2-3","85","99",'14% Off'],
   ]
 
   return (
     <>
-      <section>
+      <section className="p-3">
         <Slider {...settings} className="flex">
           {store199.map((item) => {
             return (
@@ -31,15 +35,17 @@ export default function Store199() {
                 <div className="pt-2 text-left h-[6vh]">
                   <h2 className="text-md text-left pr-3">{item[1]}</h2>
                 </div>
-                <div className="pt-6 h-[7vh]">
-                  <h3 className="text-lg text-gray-800">{item[2]}</h3>
+                <div className="pt-6 h-[7vh] flex space-x-2 ">
+                  <h3 className="text-xs text-gray-800 text-left">{item[2]}</h3>
+                  <h4 className="text-xs text-gray-800 text-left">{item[3]}</h4>
+                  <h5 className="text-xs text-gray-800 text-left">{item[4]}</h5>
                 </div>
                 <div className="flex space-x-3 pt-3 h-[3vh]">
-                  <h3 className="text-xl ">₹{item[3]}</h3>
+                  <h3 className="text-xl ">₹{item[5]}</h3>
                   <h3 className=" line-through text-lg text-lightGray">
-                    {item[4]}
+                    {item[6]}
                   </h3>
-                  <h3 className="text-green text-lg">{item[5]}</h3>
+                  <h3 className="text-green text-lg">{item[7]}</h3>
                 </div>
                 <div className="flex pt-4 space-x-2 items-center ">
                   <embed className=" w-6" src="expressDelivery.svg" />
