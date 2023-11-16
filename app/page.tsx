@@ -11,8 +11,8 @@ export default function Home() {
              *
              */}
             <div className="p-6">
-              <h2 className="font-bold text-lg">Shop By Categories</h2>
-              <h4 className="text-lightGray text-sm">
+              <h2 className="font-bold text-xl">Shop By Categories</h2>
+              <h4 className="text-lightGray text-md">
                 Freshest Meats and Much More!
               </h4>
             </div>
@@ -20,12 +20,18 @@ export default function Home() {
               <MainItems />
             </div>
             <div className="p-6">
-              <h2 className="font-bold text-lg">Combos For You</h2>
-              <h4 className="text-lightGray text-sm">
-                Savour The Savings!
-              </h4>
+              <h2 className="font-bold text-xl">Combos For You</h2>
+              <h4 className="text-lightGray text-md">Savour The Savings!</h4>
             </div>
-            <Combos/>
+
+            <div>
+              <Combos />
+            </div>
+            <div className="p-6">
+              <h2 className="font-bold text-xl">Under Rs. 199 Store</h2>
+              <h4 className="text-lightGray text-md">Stay Meativated On A Budget!</h4>
+            </div>
+            
           </div>
         </div>
       </main>
