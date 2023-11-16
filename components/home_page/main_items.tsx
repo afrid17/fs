@@ -15,7 +15,7 @@ export default function MainItems(){
                 <div className="grid grid-cols-4 pl-4 pr-4">
                     {
                         items. map(item =>{
-                            return <div className="text-center  flex flex-col justify-start items-center ">
+                            return <div key={item[0]} className="text-center  flex flex-col justify-start items-center ">
                                 <img className=" w-16 text-center  " src={item[1]}/>
                                 <label className="p-2 text-sm text-center ">{item[0]}</label>
                                 </div>

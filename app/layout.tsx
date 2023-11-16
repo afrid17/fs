@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className=" font-roboto scroll-smooth">
+        <main className=" font-roboto scroll-smooth overflow-x-hidden">
           <div>{children}</div>
         </main>
       </body>
