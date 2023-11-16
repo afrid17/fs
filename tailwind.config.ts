@@ -33,7 +33,7 @@ const config: Config = {
         pinkShade:"#ffeef2",
         darkPurple:"#3c096c",
         purple:"#7b2cbf",
-        green:"#5cf64a",
+        green:"#007200",
       }
     },
   },
