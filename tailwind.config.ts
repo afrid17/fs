@@ -34,6 +34,7 @@ const config: Config = {
         darkPurple:"#3c096c",
         purple:"#7b2cbf",
         green:"#007200",
+        chickenColor:"#ffe0e9"
       }
     },
   },
