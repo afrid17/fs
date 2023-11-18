@@ -1,6 +1,11 @@
 import { PiSlidersHorizontalBold } from "react-icons/pi";
 import { MdAdd} from "react-icons/md";
 export default function MenuSuBItems() {
+  let allItems = [
+    [
+      []
+    ]
+  ]
   return (
     <>
       <section className=" w-full h-fit flex flex-col bg-white rounded-tl-2xl rounded-tr-2xl relative -top-4">
@@ -15,7 +20,9 @@ export default function MenuSuBItems() {
             <h2 className="text-md font-bold">Filters</h2>
           </div>
         </div>
-        <div className="p-4">{<ProductShowCase />}</div>
+        <div className="p-4">{
+          <ProductShowCase />
+          }</div>
       </section>
     </>
   );
