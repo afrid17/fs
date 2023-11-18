@@ -7,6 +7,7 @@ export default function Store199() {
     slidesToShow: 1.5,
     slidesToScroll: 1,
     infinite: false,
+    arrows:false,
   }
   let store199 = [
     ["199_store/1991.webp","Chicken Curry Cut - Small Pieces","500g","| 12-18 Pieces","| Serves 4","168","179",'6% Off'],

@@ -7,6 +7,7 @@ export default function Combos() {
     slidesToShow: 1.5,
     slidesToScroll: 1,
     infinite: false,
+    arrows:false,
   };
   const combo_offers = [
     ["combo_offer/combo1.webp","Crispy Snacks Combo","725g","552","627","12% off"],

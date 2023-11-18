@@ -7,6 +7,7 @@ export default function FreshAtFreshSlice() {
     slidesToShow: 1.9,
     slidesToScroll: 1,
     infinite: false,
+    arrows:false,
   };
   const freshAtFreshSlice = [
     "freshAtFreshSlice/fresh1.webp",
