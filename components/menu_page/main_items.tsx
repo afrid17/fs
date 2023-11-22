@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function NavMainItems() {
+export default function NavMainItems({ selectedMainItem }) {
   const settings: {} = {
     slidesToShow: 2.6,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     infinite: false,
     arrows: false,
   };
@@ -25,15 +25,22 @@ export default function NavMainItems() {
         {...settings}
         className="flex justify-center items-center text-center space-x-10 pt-10"
       >
-        {main_items.map((item) => {
+        {main_items.map((item, index) => {
           return (
             <div className=" w-[33vw] pl-4 " key={item[1]}>
-              <div className="w-[28vw] flex flex-col space-y-2">
+              <div
+                onClick={() => {
+                  selectedMainItem(index)
+                }}
+                className="w-[28vw] flex flex-col space-y-2"
+              >
                 <embed
                   src={item[0]}
                   className="object-fill h-[10vh] w-[27vw] "
                 />
-                <label className="text-md text-center font-robotoMono">{item[1]}</label>
+                <label className="text-md text-center font-robotoMono">
+                  {item[1]}
+                </label>
               </div>
             </div>
           );

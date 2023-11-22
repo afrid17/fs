@@ -21,7 +21,7 @@ export default function Banner() {
     
     
 
-  };
+  }
   let banner_images = [
     "items/chicken/banners/chicken_slide1.webp",
     "items/chicken/banners/chicken_slide2.webp",
