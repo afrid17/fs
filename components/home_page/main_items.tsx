@@ -1,4 +1,4 @@
-export default function MainItems(){
+export default function MainItems({updateItem}){
     let items= [
        ["Today's Deals","main_items/todayDeals.png"],
         ["chicken","main_items/chicken.png"],
@@ -14,9 +14,12 @@ export default function MainItems(){
             <div>
                 <div className="grid grid-cols-4 pl-4 pr-4">
                     {
-                        items. map(item =>{
+                        items. map((item,index) =>{
                             return <div key={item[0]} className="text-center  flex flex-col justify-start items-center ">
-                                <img className=" w-16 text-center  " src={item[1]}/>
+                                <img onClick={()=>{
+                                    updateItem(index)
+
+                                }} className=" w-16 text-center  " src={item[1]}/>
                                 <label className="p-2 text-sm text-center ">{item[0]}</label>
                                 </div>
                             
