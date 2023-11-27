@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function HomeStructure({updatePage,updateProduct}) {
   let [selectedItem,updateSelectedItem] = useState(0)
   function updateItem(index){
+  
     updateSelectedItem(index)
     updateProduct(index)
     updatePage(1)
