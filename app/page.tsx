@@ -3,12 +3,9 @@ import allItems from "@/components/menu_page/allItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import HomeStructure from "@/page_structure/home";
 import MenuStructure from "@/page_structure/menu";
-<<<<<<< HEAD
-import Product from "@/page_structure/product";
-=======
 import ProductStructure from "@/page_structure/product";
 import { useState } from "react";
->>>>>>> 27beeb9 (commit)
+
 
 export default function Home() {
   let [selectedPage,updateSelectedPage] = useState(0)
@@ -32,9 +29,9 @@ export default function Home() {
     <>
       {
         <section className="w-full h-full ">
-<<<<<<< HEAD
-          <Product/>
-=======
+
+      
+
           {
             selectedPage == 0 ?<HomeStructure updatePage={updatePage} updateProduct={updateProduct}/>
             :selectedPage == 1?<MenuStructure updatePage={updatePage} updateProductData={updateProductData}
@@ -45,8 +42,7 @@ export default function Home() {
               :disc}/>
             :<HomeStructure updatePage={updatePage} updateProduct={updateProduct}/>
           }
-          
->>>>>>> 27beeb9 (commit)
+
         </section>
       }
     </>

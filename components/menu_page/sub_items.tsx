@@ -4,11 +4,7 @@ import { MdAdd } from "react-icons/md";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-<<<<<<< HEAD
-export default function MenuSuBItems({allItems}) {
-=======
 export default function MenuSuBItems({allItems,updatePage,updateProductData}) {
->>>>>>> 27beeb9 (commit)
   
   
   return (
@@ -27,22 +23,14 @@ export default function MenuSuBItems({allItems,updatePage,updateProductData}) {
         </div>
         <div className="p-4 space-y-4">
           {allItems.map((item) => {
-<<<<<<< HEAD
-            return <ProductShowCase productData={item} />;
-=======
             return <ProductShowCase updateProductData={updateProductData} updatePage={updatePage} productData={item} />;
->>>>>>> 27beeb9 (commit)
           })}
         </div>
       </section>
     </>
   );
 }
-<<<<<<< HEAD
-function ProductShowCase({ productData }) {
-=======
 function ProductShowCase({ productData ,updatePage,updateProductData}) {
->>>>>>> 27beeb9 (commit)
   const settings: {} = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -52,11 +40,7 @@ function ProductShowCase({ productData ,updatePage,updateProductData}) {
   };
   return (
     <>
-<<<<<<< HEAD
-      <article className="flex flex-col h-fit w-full rounded-xl shadow-lg py-2 ">
-=======
       <article onClick={()=>{updatePage(2);updateProductData(productData)}} className="flex flex-col h-fit w-full rounded-xl shadow-lg py-2 ">
->>>>>>> 27beeb9 (commit)
         <div className="w-full h-[30vh] bg-red-100 rounded-tl-xl rounded-tr-xl">
           <Slider {...settings}>
             {productData[0].map((item) => {

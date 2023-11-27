@@ -7,13 +7,6 @@ import MainItems from "@/components/home_page/main_items";
 import NavMainItems from "@/components/menu_page/main_items";
 import MenuSuBItems from "@/components/menu_page/sub_items";
 import allItems from "@/components/menu_page/allItems";
-<<<<<<< HEAD
-import { useState } from "react";
-import chickenTotalItems from "@/data/items/chicken/totalItems";
-
-export default function MenuStructure() {
-  let [selectedMainItem, updateSelectedMainItem] = useState(0);
-=======
 import { useEffect, useState } from "react";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 
@@ -38,17 +31,13 @@ export default function MenuStructure({
   }, []);
   let [selectedMainItem, updateSelectedMainItem] = useState(0);
   let [dropItems, updateDropItems] = useState(false);
->>>>>>> 27beeb9 (commit)
   function updateSelectedIndex(index) {
     updateSelectedMainItem(index);
     console.log(index);
   }
-<<<<<<< HEAD
-=======
   function updateDropItemsValue(value) {
     updateDropItems(value);
   }
->>>>>>> 27beeb9 (commit)
   return (
     <>
       <div>
@@ -94,24 +83,8 @@ export default function MenuStructure({
         </div>
         <div>
           {selectedMainItem == 0 ? (
-<<<<<<< HEAD
-            <MenuSuBItems allItems={chickenTotalItems} />
-          ) : selectedMainItem == 1 ? (
-            <MenuSuBItems allItems={allItems[0]} />
-          ) : selectedMainItem == 2 ? (
-            <MenuSuBItems allItems={allItems[1]} />
-          ) : selectedMainItem == 3 ? (
-            <MenuSuBItems allItems={allItems[2]} />
-          ) : selectedMainItem == 4 ? (
-            <MenuSuBItems allItems={allItems[3]} />
-          ) : selectedMainItem == 5 ? (
-            <MenuSuBItems allItems={allItems[4]} />
-          ) : selectedMainItem == 6 ? (
-            <MenuSuBItems allItems={allItems[5]} />
-          ) : (
-            <MenuSuBItems allItems={allItems[6]} />
-=======
             <MenuSuBItems
+            
               updateProductData={updateProductData}
               updatePage={updatePage}
               allItems={totalItems}
@@ -158,7 +131,6 @@ export default function MenuStructure({
               updatePage={updatePage}
               allItems={allItems[6]}
             />
->>>>>>> 27beeb9 (commit)
           )}
         </div>
       </div>

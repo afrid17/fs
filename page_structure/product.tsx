@@ -7,9 +7,6 @@ import { FiSearch } from "react-icons/fi";
 import { TbWeight } from "react-icons/tb";
 import { ImSpoonKnife } from "react-icons/im";
 import { PiBowlFood } from "react-icons/pi";
-<<<<<<< HEAD
-export default function Product() {
-=======
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import {  useEffect, useRef, useState } from "react";
@@ -57,45 +54,28 @@ export default function ProductStructure({productData,disc,updatePage}) {
     );
   }
 
->>>>>>> 27beeb9 (commit)
   const settings: {} = {
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: false,
     arrows: true,
     dots: false,
-<<<<<<< HEAD
-  };
-=======
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
   
->>>>>>> 27beeb9 (commit)
   return (
     <>
       <main className="w-full">
         <div>
           <div className="p-3 flex items-center justify-between ">
-<<<<<<< HEAD
-            <a className="text-2xl ">
-=======
             <a className="text-2xl " onClick={()=>{updatePage(1)}}>
->>>>>>> 27beeb9 (commit)
               <MdOutlineKeyboardBackspace />
             </a>
             <a className="text-xl">
               <FiSearch />
             </a>
           </div>
-<<<<<<< HEAD
-          <article className="pt-4 flex flex-col">
-            <div className="h-[40vh] w-[100vw]">
-              <Slider {...settings} className="h-[40vh] w-[100vw]"></Slider>
-            </div>
-            <div className="pl-4 pr-4 pt-4 pb-1">
-              <label>Premium chicken high Boneless</label>
-=======
           <article className=" flex flex-col">
             <div className="h-[40vh] w-[100vw]">
               <Slider
@@ -119,53 +99,29 @@ export default function ProductStructure({productData,disc,updatePage}) {
             </div>
             <div className="pl-4 pr-4 text-xl pt-4 pb-1">
               <label>{productData[1]}</label>
->>>>>>> 27beeb9 (commit)
             </div>
             <div className="w-full pl-4 pr-4  text-center text-sm text-black flex justify-evenly space-x-[1px] ">
               <div className="bg-gray-200 text-center items-center justify-center flex space-x-1 w-[33vw] h-[25px] rounded-tl-md rounded-bl-md ">
                 <a className="text-xs">
                   <TbWeight />
                 </a>
-<<<<<<< HEAD
-                <h3 className="text-xs">450g</h3>
-=======
                 <h3 className="text-xs">{productData[3]}</h3>
->>>>>>> 27beeb9 (commit)
               </div>
               <div className="bg-gray-200 w-[33vw] h-[25px] text-center items-center justify-center flex space-x-1">
                 <a className="text-xs">
                   <ImSpoonKnife />
                 </a>
-<<<<<<< HEAD
-                <h3 className="text-xs">3-7 Pieces</h3>
-=======
                 <h3 className="text-xs">{productData[4]}</h3>
->>>>>>> 27beeb9 (commit)
               </div>
               <div className="bg-gray-200 w-[33vw] h-[25px] rounded-tr-md rounded-br-md text-center items-center justify-center flex space-x-1">
                 <a className="text-xs">
                   <PiBowlFood />
                 </a>
-<<<<<<< HEAD
-                <h3 className="text-xs">Serves 5</h3>
-=======
                 <h3 className="text-xs">{productData[5]}</h3>
->>>>>>> 27beeb9 (commit)
               </div>
             </div>
             <div className="pl-4 pr-10 pt-4 text-start text-xs text-lightGray">
               <p>
-<<<<<<< HEAD
-                FreshSlice Chicken Thighs(Boneless) is a juicy cut that does't
-                dry out easily.These equality-sized boneless pueces ensure
-                uniform cooking. Sincethey are among the meatiest portions of
-                the bird, they can easily be slow cooked or grilled.
-              </p>
-            </div>
-          </article>
-        </div>
-        <div className="fixed  flex flex-col w-[100vw] bottom-0  h-[10vh] bg-gray-100  shadow-[rgba(0,0,15,0.5)_10px_5px_4px_0px]">
-=======
                 {disc}
               </p>
             </div>
@@ -201,7 +157,6 @@ export default function ProductStructure({productData,disc,updatePage}) {
           </article>
         </div>
         <div className="fixed  flex flex-col w-[100vw] bottom-0  h-[10vh] bg-gray-100 topShadow">
->>>>>>> 27beeb9 (commit)
           <div className="flex pl-4 pt-1 space-x-2 items-center ">
             <embed className=" w-4" src="expressDelivery.svg" />
             <h2 className="text-xs text-gray-800">Today in 40 mins</h2>
@@ -209,13 +164,6 @@ export default function ProductStructure({productData,disc,updatePage}) {
           <div className="w-full pl-4 flex justify-between h-full bg-white pt-1">
             <div>
               <h1 className="font-bold  text-2xl flex items-start justify-start ">
-<<<<<<< HEAD
-                <span className="text-sm pr-[2px]  font-normal">₹</span>284
-              </h1>
-            </div>
-            <div className="flex space-x-1 items-center h-fit justify-center w-fit bg-redPink text-white px-8
-            rounded-lg font-bold py-[6px]">
-=======
                 <span className="text-sm pr-[2px]  font-normal">₹</span>{productData[6]}
               </h1>
             </div>
@@ -223,7 +171,6 @@ export default function ProductStructure({productData,disc,updatePage}) {
               className="flex space-x-1 items-center h-fit justify-center w-fit bg-redPink text-white px-8
             rounded-lg font-bold py-[6px] shadow-lg"
             >
->>>>>>> 27beeb9 (commit)
               <h1 className="font-normal text-sm font-robotoMono">Add </h1>
               <a className="text-lg font-light text-gray-100">
                 <MdAdd />
@@ -231,8 +178,6 @@ export default function ProductStructure({productData,disc,updatePage}) {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-=======
         <div className=" flex flex-col bg-pinkShade  space-y-8 pb-48 pl-4 pr-4 mt-6 pt-10 ">
           <div className="flex flex-col space-y-">
             <div className="w-[10vw] h-[3px] bg-redPink rounded-lg"></div>
@@ -274,7 +219,6 @@ export default function ProductStructure({productData,disc,updatePage}) {
             </p>
           </div>
         </div>
->>>>>>> 27beeb9 (commit)
       </main>
     </>
   );
