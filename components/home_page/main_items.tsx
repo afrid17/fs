@@ -4,7 +4,7 @@ export default function MainItems({updateItem}){
     let items= [
        ["Today's Deals","main_items/todayDeals.png","today-deals"],
         ["chicken","main_items/chicken.png","chicken"],
-        ["Fish & Seafood","main_items/fish.png","fish"],
+        ["Fish ","main_items/fish.png","fish"],
         ["Mutton","main_items/mutton.png","mutton"],
         ["Prawns","main_items/prawns.png","prawans"],
         ["Kebab","main_items/kebab.png","kebab"],

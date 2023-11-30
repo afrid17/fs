@@ -13,31 +13,191 @@ import chickenAllItems from "@/data/items/chicken/allItems";
 import chickenBannerImages from "@/data/items/chicken/bannerImages";
 import chicken_main_items from "@/data/items/chicken/mainItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
+import Link from "next/link";
+import Product from "../product/page";
 
 export default function Chicken() {
   let [productData, updateProductData] = useState([]);
+  let [productPage, updateProductPage] = useState(false);
+  let [selectedMainItem, updateSelectedMainItem] = useState(0);
+  const discription =
+    "Chicken, a culinary staple, offers versatile options for meals. Whether grilled, roasted, or sautéed, its tender texture and savory taste make it a go-to ingredient, elevating dishes across various cuisines with delightful flavors and endless possibilities.";
+  let [filterContainer, updateFilterContainer] = useState(true);
+  function updateUpdateProductPage(value) {
+    updateProductPage(false);
+  }
   return (
     <>
       <main>
+        {filterContainer ? <FilterContainer /> : <FilterContainer />}
         <div>
-          <ChickenMenuStructure
-            totalItems={chickenTotalItems}
-            allItems={chickenAllItems}
-            main_items={chicken_main_items}
-            banner_images={chickenBannerImages}
-            updateProductData={updateProductData}
-          />
+          {productPage ? (
+            <Product
+              productData={productData}
+              discription={discription}
+              updateProductPage={updateUpdateProductPage}
+            />
+          ) : (
+            <ChickenMenuStructure
+              totalItems={chickenTotalItems}
+              allItems={chickenAllItems}
+              main_items={chicken_main_items}
+              banner_images={chickenBannerImages}
+              updateProductData={updateProductData}
+              updateProductPage={updateProductPage}
+              selectedMainItem={selectedMainItem}
+              updateSelectedMainItem={updateSelectedMainItem}
+            />
+          )}
         </div>
       </main>
     </>
   );
 }
+function FilterContainer() {
+  let leftItems = [
+    "Delivery time",
+    "Chicken type",
+    "Bone type",
+    "Cut type",
+    "Best suited for",
+    "pack Size",
+  ];
+  let rightItems = [
+    ["Express", "Today", "Tomorrow"],
+    ["Broiler", "Country", "Kadaknath"],
+    ["Bone-in", "Boneless"],
+    [
+      "Whole & Curry Cut",
+      "Wings & Offals",
+      "Thigh & Drumstick",
+      "Breast",
+      "Cubes & Strips",
+      "Mince",
+      "Whole leg & Lollipop ",
+    ],
+    [
+      "Grill",
+      "Deep Fry",
+      "Roast",
+      "Stuffing",
+      "Curry",
+      "Biryani",
+      "Bake",
+      "Pan Fry",
+    ],
+    ["Large Pack", "Regular Pack", "Mini Pack"],
+  ];
+  let [selectedLeftItem, updateSelectedLeftItem] = useState(0);
+  let [slectedRightItems, updateSelectedRightItems] = useState(rightItems[0]);
+  let [selectedRightItem, updateSelectedRightItem] = useState([
+    [false, false, false],
+    [false, false, false],
+    [false, false],
+    [false, false, false, false, false, false, false],
+    [false,false,false,false,false,false,false,false],
+    [false,false,false],
+  ])
+  let checkedItems = [
+    [false, false, false],
+    [false, false, false],
+    [false, false],
+    [false, false, false, false, false, false, false],
+    [false,false,false,false,false,false,false,false],
+    [false,false,false],
+  ]
+  // useEffect(()=>{
+  //   updateSelectedRightItem([undefined,undefined])
+  // },[selectedLeftItem])
+  return (
+    <>
+      <section className="bg-white w-[100vw] h-[50vh] fixed z-50  bottom-0 rounded-tl-3xl rounded-tr-3xl  ">
+        <div>
+          <div className="h-[7vh] w-full flex items-center border-b ">
+            <h2 className="text-xl pl-6  font-bold">Filters</h2>
+          </div>
+          <div className="flex pt-3">
+            <div className="flex flex-col text-xl h-[32vh] w-[50vw] border-r space-y-10 overflow-x-auto hide_scrollBar">
+              {leftItems.map((item, index) => {
+                return (
+                  <div
+                    className=" w-[47vw] flex items-center space-x-6"
+                    onClick={() => {
+                      updateSelectedLeftItem(index);
+                      updateSelectedRightItems(rightItems[index]);
+                    }}
+                  >
+                    <div
+                      className={
+                        selectedLeftItem === index
+                          ? " bg-pink-600 h-[6vh] w-[1vh] rounded-tr-xl rounded-br-xl "
+                          : " bg-white h-[0vh] w-[0vh] rounded-tr-xl rounded-br-xl "
+                      }
+                    ></div>
+                    <label
+                      className={
+                        selectedLeftItem === index
+                          ? "text-pink-600 font-bold text-sm"
+                          : "text-black font-bold text-sm"
+                      }
+                    >
+                      {item}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="w-[50vw] flex flex-col pl-6 h-[32vh] space-y-6 overflow-x-auto hide_scrollBar">
+              {slectedRightItems.map((item, index) => {
+                return (
+                  <div className="flex space-x-4 ">
+                    <input
+                      onClick={() => {
+                        checkedItems[selectedLeftItem][index] = true
+                        updateSelectedRightItem(checkedItems)
+                        
+                      }}
+                      className=" accent-white"
+                      type="checkbox"
+                      checked={
+                        selectedRightItem[selectedLeftItem][index] === true
+                          ? true
+                          : false
+                      }
+                    />
+                    <label className=" text-lg ">{item}</label>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex items-center w-[100vw] justify-evenly mb-2 h-fit py-2">
+            <div className=" flex items-center ">
+              <a className="rounded-xl border w-fit h-fit px-4 py-2 bg-zinc-100 text-pink-600">
+                Clear Filters
+              </a>
+            </div>
+            <div className=" flex items-center ">
+              <a className="rounded-lg text-white border w-fit h-fit px-4 py-2 bg-pink-600">
+                View 20 Items
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function ChickenMenuStructure({
   totalItems,
   allItems,
   updateProductData,
   main_items,
   banner_images,
+  updateProductPage,
+  selectedMainItem,
+  updateSelectedMainItem,
 }) {
   const handleScroll = () => {
     updateDropItems(false);
@@ -52,7 +212,7 @@ function ChickenMenuStructure({
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  let [selectedMainItem, updateSelectedMainItem] = useState(0);
+
   let [dropItems, updateDropItems] = useState(false);
   function updateSelectedIndex(index) {
     updateSelectedMainItem(index);
@@ -68,9 +228,11 @@ function ChickenMenuStructure({
           <div className=" pt-6">
             <div className="flex pl-4 pr-4   justify-between ">
               <div className=" flex space-x-4 items-center ">
-                <a className="text-2xl ">
-                  <MdOutlineKeyboardBackspace />
-                </a>
+                <Link href={"/"}>
+                  <label className="text-2xl ">
+                    <MdOutlineKeyboardBackspace />
+                  </label>
+                </Link>
                 <div className="flex space-x-1 items-center">
                   <label className="text-xl font-bold  ">Chicken</label>
                   <a
@@ -93,7 +255,7 @@ function ChickenMenuStructure({
             </div>
             {dropItems ? (
               <div className=" w-full h-[53vh] bg-white z-50 fixed  ">
-                <MenuMainItems />
+                <MenuMainItems index={0} />
               </div>
             ) : null}
 
@@ -112,41 +274,49 @@ function ChickenMenuStructure({
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={totalItems}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 1 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[0]}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 2 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[1]}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 3 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[2]}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 4 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[3]}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 5 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[4]}
+              updateProductPage={updateProductPage}
             />
           ) : selectedMainItem == 6 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[5]}
+              updateProductPage={updateProductPage}
             />
           ) : (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[6]}
+              updateProductPage={updateProductPage}
             />
           )}
         </div>
@@ -233,7 +403,8 @@ function NavMainItems({ selectedMainItem, main_items }) {
     </>
   );
 }
-function MenuSuBItems({ allItems, updateProductData }) {
+
+function MenuSuBItems({ allItems, updateProductData, updateProductPage }) {
   return (
     <>
       <section className=" w-full h-fit flex flex-col bg-white rounded-tl-2xl rounded-tr-2xl relative -top-4">
@@ -256,6 +427,7 @@ function MenuSuBItems({ allItems, updateProductData }) {
               <ProductShowCase
                 updateProductData={updateProductData}
                 productData={item}
+                updateProductPage={updateProductPage}
               />
             );
           })}
@@ -264,7 +436,11 @@ function MenuSuBItems({ allItems, updateProductData }) {
     </>
   );
 }
-function ProductShowCase({ productData, updateProductData }) {
+function ProductShowCase({
+  productData,
+  updateProductData,
+  updateProductPage,
+}) {
   const settings: {} = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -277,6 +453,7 @@ function ProductShowCase({ productData, updateProductData }) {
       <article
         onClick={() => {
           updateProductData(productData);
+          updateProductPage(true);
         }}
         className="flex flex-col h-fit w-full rounded-xl shadow-lg py-2 "
       >

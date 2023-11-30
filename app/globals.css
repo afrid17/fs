@@ -8,3 +8,10 @@
 .topShadow{
     box-shadow: 0 -5px 20px -5px #d4d2d2;
 }
+.hide_scrollBar::-webkit-scrollbar {
+    display: none;
+}
+.hide_scrollBar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

@@ -1,4 +1,4 @@
-export default function MenuMainItems() {
+export default function MenuMainItems({index}) {
     let images = [
       "main_items/chicken.png",
       "main_items/fish.png",
@@ -21,13 +21,13 @@ export default function MenuMainItems() {
       <>
         <section>
           <div className="flex flex-col pt-2">
-            {images.map((item, index) => {
+            {images.map((item, i) => {
               return (
                 <>
                   <div className="pl-3 flex space-x-4 items-center w-[100-vw] h-[7vh] bg-white border-b border-gray-300">
                     <img className="w-10 h-10  " src={item} alt="" />
-                    <label className=" font-robotoMono text-sm">
-                      {names[index]}
+                    <label className={index === i?" font-robotoMono text-sm text-blue-500":" font-robotoMono text-sm"}>
+                      {names[i]}
                     </label>
                   </div>
                 </>

@@ -37,6 +37,7 @@ const config: Config = {
         purple: "#7b2cbf",
         green: "#007200",
         chickenColor: "#ffe0e9",
+        fishColor:'#c9e3ff'
       },
     },
   },
