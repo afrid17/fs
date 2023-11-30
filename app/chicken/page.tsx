@@ -29,7 +29,8 @@ export default function Chicken() {
   let [t, ut] = useState(chickenTotalItems);
   let [bW, uBW] = useState([]);
   let [sI, uSI] = useState([]);
-  let [sW,uSW] = useState([])
+  let [sW, uSW] = useState([]);
+  let [selectedCount, updateSelectedCount] = useState(0);
   return (
     <>
       <main>
@@ -43,9 +44,11 @@ export default function Chicken() {
             bW={bW}
             sW={sW}
             uSW={uSW}
-            
             sI={sI}
             uSI={uSI}
+            updateSelectedMainItem={updateSelectedMainItem}
+            uSC={updateSelectedCount}
+            sC={selectedCount}
           />
         ) : null}
         <div>
@@ -55,7 +58,7 @@ export default function Chicken() {
               discription={discription}
               updateProductPage={updateUpdateProductPage}
             />
-          ) : ( 
+          ) : (
             <ChickenMenuStructure
               totalItems={t}
               allItems={chickenAllItems}
@@ -66,7 +69,7 @@ export default function Chicken() {
               selectedMainItem={selectedMainItem}
               updateSelectedMainItem={updateSelectedMainItem}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           )}
         </div>
@@ -84,9 +87,11 @@ function FilterContainer({
   sI,
   uSI,
   sW,
-  uSW
+  uSW,
+  updateSelectedMainItem,
+  uSC,
+  sC,
 }) {
-  
   let leftItems = [
     "Delivery time",
     "Chicken type",
@@ -155,21 +160,19 @@ function FilterContainer({
       });
     });
     updateSearchedItems(totalItems);
-    ut(totalItems)
-   
+    ut(totalItems);
   }
   useEffect(() => {
-    bW.length > 1?(
-
-      updateSelectedRightItem(sI),
-      updateSelectedItems(sI),
-      updateSearchedItems(t),
-      updateSelectedWords(sW),
-      updateSearchedItems(t)
-          ):(null)
-
-    
+    bW.length > 1
+      ? (updateSelectedRightItem(sI),
+        updateSelectedItems(sI),
+        updateSearchedItems(t),
+        updateSelectedWords(sW),
+        updateSearchedItems(t),
+        updateSelectedWordsCount(sC))
+      : null;
   }, []);
+  let [selectedWordsCount, updateSelectedWordsCount] = useState(0);
 
   return (
     <>
@@ -217,7 +220,10 @@ function FilterContainer({
                       onClick={() => {
                         let k = [];
                         checkedItems[selectedLeftItem][index]
-                          ? ((checkedItems[selectedLeftItem][index] = false),
+                          ? (selectedWordsCount >= 1
+                              ? updateSelectedWordsCount(selectedWordsCount - 1)
+                              : null,
+                            (checkedItems[selectedLeftItem][index] = false),
                             updateSelectedRightItem(checkedItems),
                             updateSelectedItems(checkedItems),
                             updateSelectedRightItems(
@@ -229,7 +235,8 @@ function FilterContainer({
                             (words[selectedLeftItem] = k),
                             updateSelectedWords(words),
                             searchForWord())
-                          : ((checkedItems[selectedLeftItem][index] = true),
+                          : (updateSelectedWordsCount(selectedWordsCount + 1),
+                            (checkedItems[selectedLeftItem][index] = true),
                             updateSelectedRightItem(checkedItems),
                             updateSelectedItems(checkedItems),
                             updateSelectedRightItems(
@@ -269,14 +276,24 @@ function FilterContainer({
             <div
               className=" flex items-center "
               onClick={() => {
-                updateFilterContainer(false);
-                uBW(selectedWords)
-                uSI(selectedRightItem)
-                ut(searchedItems)
-                uSW(selectedWords)
+                searchedItems.length !== 0
+                  ? (uSC(selectedWordsCount),
+                    updateFilterContainer(false),
+                    uBW(selectedWords),
+                    uSI(selectedRightItem),
+                    ut(searchedItems),
+                    uSW(selectedWords),
+                    updateSelectedMainItem(0))
+                  : null;
               }}
             >
-              <a className="rounded-lg text-white border w-fit h-fit px-4 py-2 bg-pink-600">
+              <a
+                className={
+                  searchedItems.length !== 0
+                    ? "rounded-lg text-white border w-fit h-fit px-4 py-2 bg-pink-600"
+                    : "rounded-lg text-gray-400 border w-fit h-fit px-4 py-2 bg-zinc-100"
+                }
+              >
                 {"View " + searchedItems.length + " Items"}
               </a>
             </div>
@@ -297,7 +314,7 @@ function ChickenMenuStructure({
   selectedMainItem,
   updateSelectedMainItem,
   updateFilterContainer,
-  t
+  selectedCount,
 }) {
   const handleScroll = () => {
     updateDropItems(false);
@@ -376,7 +393,7 @@ function ChickenMenuStructure({
               allItems={totalItems}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 1 ? (
             <MenuSuBItems
@@ -384,8 +401,7 @@ function ChickenMenuStructure({
               allItems={allItems[0]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
-              
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 2 ? (
             <MenuSuBItems
@@ -393,7 +409,7 @@ function ChickenMenuStructure({
               allItems={allItems[1]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 3 ? (
             <MenuSuBItems
@@ -401,7 +417,7 @@ function ChickenMenuStructure({
               allItems={allItems[2]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 4 ? (
             <MenuSuBItems
@@ -409,7 +425,7 @@ function ChickenMenuStructure({
               allItems={allItems[3]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 5 ? (
             <MenuSuBItems
@@ -417,7 +433,7 @@ function ChickenMenuStructure({
               allItems={allItems[4]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : selectedMainItem == 6 ? (
             <MenuSuBItems
@@ -425,7 +441,7 @@ function ChickenMenuStructure({
               allItems={allItems[5]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           ) : (
             <MenuSuBItems
@@ -433,7 +449,7 @@ function ChickenMenuStructure({
               allItems={allItems[6]}
               updateProductPage={updateProductPage}
               updateFilterContainer={updateFilterContainer}
-              t={t}
+              selectedCount={selectedCount}
             />
           )}
         </div>
@@ -525,7 +541,8 @@ function MenuSuBItems({
   allItems,
   updateProductData,
   updateProductPage,
-  updateFilterContainer,t
+  updateFilterContainer,
+  selectedCount,
 }) {
   return (
     <>
@@ -540,13 +557,13 @@ function MenuSuBItems({
             onClick={() => {
               updateFilterContainer(true);
             }}
-            className=" w-[30vw] h-[5vh] flex justify-center items-center  rounded-2xl border space-x-2"
+            className=" w-[33vw] h-[5vh] flex justify-center items-center  rounded-2xl border space-x-2"
           >
             <a className=" text-lg">
               <PiSlidersHorizontalBold />
             </a>
             <h2 className="text-md font-bold">Filters</h2>
-            <h3>{}</h3>
+            <h3 className=" text-md font-bold text-red-500 ">{selectedCount !== 0 ? ("("+selectedCount+")") : null}</h3>
           </div>
         </div>
         <div className="p-4 space-y-4">
