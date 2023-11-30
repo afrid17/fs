@@ -22,18 +22,32 @@ export default function Chicken() {
   let [selectedMainItem, updateSelectedMainItem] = useState(0);
   const discription =
     "Chicken, a culinary staple, offers versatile options for meals. Whether grilled, roasted, or sautéed, its tender texture and savory taste make it a go-to ingredient, elevating dishes across various cuisines with delightful flavors and endless possibilities.";
-  let [filterContainer, updateFilterContainer] = useState(true);
+  let [filterContainer, updateFilterContainer] = useState(false);
   function updateUpdateProductPage(value) {
     updateProductPage(false);
   }
+  let [t, ut] = useState(chickenTotalItems);
+  let [bW, uBW] = useState([]);
+  let [sI, uSI] = useState([]);
+  let [sW,uSW] = useState([])
   return (
     <>
       <main>
         {filterContainer ? (
-          <FilterContainer totalItems={chickenTotalItems} />
-        ) : (
-          <FilterContainer totalItems={chickenTotalItems} />
-        )}
+          <FilterContainer
+            totalItems={chickenTotalItems}
+            ut={ut}
+            t={t}
+            uBW={uBW}
+            updateFilterContainer={updateFilterContainer}
+            bW={bW}
+            sW={sW}
+            uSW={uSW}
+            
+            sI={sI}
+            uSI={uSI}
+          />
+        ) : null}
         <div>
           {productPage ? (
             <Product
@@ -41,9 +55,9 @@ export default function Chicken() {
               discription={discription}
               updateProductPage={updateUpdateProductPage}
             />
-          ) : (
+          ) : ( 
             <ChickenMenuStructure
-              totalItems={chickenTotalItems}
+              totalItems={t}
               allItems={chickenAllItems}
               main_items={chicken_main_items}
               banner_images={chickenBannerImages}
@@ -51,6 +65,8 @@ export default function Chicken() {
               updateProductPage={updateProductPage}
               selectedMainItem={selectedMainItem}
               updateSelectedMainItem={updateSelectedMainItem}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           )}
         </div>
@@ -58,7 +74,19 @@ export default function Chicken() {
     </>
   );
 }
-function FilterContainer({ totalItems }) {
+function FilterContainer({
+  totalItems,
+  ut,
+  t,
+  updateFilterContainer,
+  uBW,
+  bW,
+  sI,
+  uSI,
+  sW,
+  uSW
+}) {
+  
   let leftItems = [
     "Delivery time",
     "Chicken type",
@@ -70,16 +98,8 @@ function FilterContainer({ totalItems }) {
   let rightItems = [
     ["Express", "Today", "Tomorrow"],
     ["Broiler", "Country", "Kadaknath"],
-    ["Bone-in", "Boneless"],
-    [
-      "Whole & Curry Cut",
-      "Wings & Offals",
-      "Thigh & Drumstick",
-      "Breast",
-      "Cubes & Strips",
-      "Mince",
-      "Whole leg & Lollipop ",
-    ],
+    ["Bone in", "Boneless"],
+    ["Curry Cut", "Offals", "Thigh", "Breast", "Cubes", "Mince", "Lollipop "],
     [
       "Grill",
       "Deep Fry",
@@ -88,9 +108,9 @@ function FilterContainer({ totalItems }) {
       "Curry",
       "Biryani",
       "Bake",
-      "Pan Fry",
+      "Pan",
     ],
-    ["Large Pack", "Regular Pack", "Mini Pack"],
+    ["Large", "Regular", "Mini"],
   ];
   let [selectedLeftItem, updateSelectedLeftItem] = useState(0);
   let [slectedRightItems, updateSelectedRightItems] = useState(rightItems[0]);
@@ -120,25 +140,36 @@ function FilterContainer({ totalItems }) {
   ];
   let [searchedItems, updateSearchedItems] = useState(totalItems);
   let [selectedWords, updateSelectedWords] = useState([[], [], [], [], [], []]);
-  let words = selectedWords; 
+  let words = selectedWords;
   function searchForWord() {
-    
     var array_1 = totalItems;
     let array_2 = [];
     let array_3 = [];
-    selectedWords.map((a,ai)=>{
-      a.map((b,bi)=>{
-        totalItems.map((c,ci)=>{
-          (c[1].toLowerCase()).includes(b.toLowerCase())?null:totalItems = totalItems.filter(x => x !== c);
-        })
-      })
-    })
-    console.log(totalItems)
-    
+    selectedWords.map((a, ai) => {
+      a.map((b, bi) => {
+        totalItems.map((c, ci) => {
+          c[1].toLowerCase().includes(b.toLowerCase())
+            ? null
+            : (totalItems = totalItems.filter((x) => x !== c));
+        });
+      });
+    });
+    updateSearchedItems(totalItems);
+    ut(totalItems)
+   
   }
-  // useEffect(()=>{
-  //   console.log(selectedWords)
-  // },[updateSelectedWords])
+  useEffect(() => {
+    bW.length > 1?(
+
+      updateSelectedRightItem(sI),
+      updateSelectedItems(sI),
+      updateSearchedItems(t),
+      updateSelectedWords(sW),
+      updateSearchedItems(t)
+          ):(null)
+
+    
+  }, []);
 
   return (
     <>
@@ -227,6 +258,7 @@ function FilterContainer({ totalItems }) {
             <div
               onClick={() => {
                 updateSelectedRightItem(clearFilters);
+                updateSearchedItems(chickenTotalItems);
               }}
               className=" flex items-center "
             >
@@ -234,7 +266,16 @@ function FilterContainer({ totalItems }) {
                 Clear Filters
               </a>
             </div>
-            <div className=" flex items-center ">
+            <div
+              className=" flex items-center "
+              onClick={() => {
+                updateFilterContainer(false);
+                uBW(selectedWords)
+                uSI(selectedRightItem)
+                ut(searchedItems)
+                uSW(selectedWords)
+              }}
+            >
               <a className="rounded-lg text-white border w-fit h-fit px-4 py-2 bg-pink-600">
                 {"View " + searchedItems.length + " Items"}
               </a>
@@ -255,6 +296,8 @@ function ChickenMenuStructure({
   updateProductPage,
   selectedMainItem,
   updateSelectedMainItem,
+  updateFilterContainer,
+  t
 }) {
   const handleScroll = () => {
     updateDropItems(false);
@@ -332,48 +375,65 @@ function ChickenMenuStructure({
               updateProductData={updateProductData}
               allItems={totalItems}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : selectedMainItem == 1 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[0]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
+              
             />
           ) : selectedMainItem == 2 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[1]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : selectedMainItem == 3 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[2]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : selectedMainItem == 4 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[3]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : selectedMainItem == 5 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[4]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : selectedMainItem == 6 ? (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[5]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           ) : (
             <MenuSuBItems
               updateProductData={updateProductData}
               allItems={allItems[6]}
               updateProductPage={updateProductPage}
+              updateFilterContainer={updateFilterContainer}
+              t={t}
             />
           )}
         </div>
@@ -461,7 +521,12 @@ function NavMainItems({ selectedMainItem, main_items }) {
   );
 }
 
-function MenuSuBItems({ allItems, updateProductData, updateProductPage }) {
+function MenuSuBItems({
+  allItems,
+  updateProductData,
+  updateProductPage,
+  updateFilterContainer,t
+}) {
   return (
     <>
       <section className=" w-full h-fit flex flex-col bg-white rounded-tl-2xl rounded-tr-2xl relative -top-4">
@@ -471,11 +536,17 @@ function MenuSuBItems({ allItems, updateProductData, updateProductPage }) {
               {allItems.length + " Items"}
             </label>
           </div>
-          <div className=" w-[30vw] h-[5vh] flex justify-center items-center  rounded-2xl border space-x-2">
+          <div
+            onClick={() => {
+              updateFilterContainer(true);
+            }}
+            className=" w-[30vw] h-[5vh] flex justify-center items-center  rounded-2xl border space-x-2"
+          >
             <a className=" text-lg">
               <PiSlidersHorizontalBold />
             </a>
             <h2 className="text-md font-bold">Filters</h2>
+            <h3>{}</h3>
           </div>
         </div>
         <div className="p-4 space-y-4">
