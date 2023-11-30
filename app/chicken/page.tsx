@@ -95,20 +95,26 @@ function FilterContainer() {
     [false, false, false],
     [false, false],
     [false, false, false, false, false, false, false],
-    [false,false,false,false,false,false,false,false],
-    [false,false,false],
-  ])
-  let checkedItems = [
+    [false, false, false, false, false, false, false, false],
+    [false, false, false],
+  ]);
+  let [checkedItems, updateSelectedItems] = useState([
     [false, false, false],
     [false, false, false],
     [false, false],
     [false, false, false, false, false, false, false],
-    [false,false,false,false,false,false,false,false],
-    [false,false,false],
-  ]
-  // useEffect(()=>{
-  //   updateSelectedRightItem([undefined,undefined])
-  // },[selectedLeftItem])
+    [false, false, false, false, false, false, false, false],
+    [false, false, false],
+  ]);
+  let clearFilters = [
+    [false, false, false],
+    [false, false, false],
+    [false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false],
+    [false, false, false],
+  ];
+
   return (
     <>
       <section className="bg-white w-[100vw] h-[50vh] fixed z-50  bottom-0 rounded-tl-3xl rounded-tr-3xl  ">
@@ -153,10 +159,21 @@ function FilterContainer() {
                   <div className="flex space-x-4 ">
                     <input
                       onClick={() => {
-                        checkedItems[selectedLeftItem][index] = true
-                        updateSelectedRightItem(checkedItems)
-                        
+                        checkedItems[selectedLeftItem][index]
+                          ? ((checkedItems[selectedLeftItem][index] = false),
+                            updateSelectedRightItem(checkedItems),
+                            updateSelectedItems(checkedItems),
+                            updateSelectedRightItems(
+                              rightItems[selectedLeftItem]
+                            ))
+                          : ((checkedItems[selectedLeftItem][index] = true),
+                            updateSelectedRightItem(checkedItems),
+                            updateSelectedItems(checkedItems),
+                            updateSelectedRightItems(
+                              rightItems[selectedLeftItem]
+                            ));
                       }}
+                      id="checkedBox"
                       className=" accent-white"
                       type="checkbox"
                       checked={
@@ -172,7 +189,12 @@ function FilterContainer() {
             </div>
           </div>
           <div className="flex items-center w-[100vw] justify-evenly mb-2 h-fit py-2">
-            <div className=" flex items-center ">
+            <div
+              onClick={() => {
+                updateSelectedRightItem(clearFilters);
+              }}
+              className=" flex items-center "
+            >
               <a className="rounded-xl border w-fit h-fit px-4 py-2 bg-zinc-100 text-pink-600">
                 Clear Filters
               </a>
