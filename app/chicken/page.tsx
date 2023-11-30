@@ -29,7 +29,11 @@ export default function Chicken() {
   return (
     <>
       <main>
-        {filterContainer ? <FilterContainer /> : <FilterContainer />}
+        {filterContainer ? (
+          <FilterContainer totalItems={chickenTotalItems} />
+        ) : (
+          <FilterContainer totalItems={chickenTotalItems} />
+        )}
         <div>
           {productPage ? (
             <Product
@@ -54,7 +58,7 @@ export default function Chicken() {
     </>
   );
 }
-function FilterContainer() {
+function FilterContainer({ totalItems }) {
   let leftItems = [
     "Delivery time",
     "Chicken type",
@@ -114,6 +118,27 @@ function FilterContainer() {
     [false, false, false, false, false, false, false, false],
     [false, false, false],
   ];
+  let [searchedItems, updateSearchedItems] = useState(totalItems);
+  let [selectedWords, updateSelectedWords] = useState([[], [], [], [], [], []]);
+  let words = selectedWords; 
+  function searchForWord() {
+    
+    var array_1 = totalItems;
+    let array_2 = [];
+    let array_3 = [];
+    selectedWords.map((a,ai)=>{
+      a.map((b,bi)=>{
+        totalItems.map((c,ci)=>{
+          (c[1].toLowerCase()).includes(b.toLowerCase())?null:totalItems = totalItems.filter(x => x !== c);
+        })
+      })
+    })
+    console.log(totalItems)
+    
+  }
+  // useEffect(()=>{
+  //   console.log(selectedWords)
+  // },[updateSelectedWords])
 
   return (
     <>
@@ -159,19 +184,29 @@ function FilterContainer() {
                   <div className="flex space-x-4 ">
                     <input
                       onClick={() => {
+                        let k = [];
                         checkedItems[selectedLeftItem][index]
                           ? ((checkedItems[selectedLeftItem][index] = false),
                             updateSelectedRightItem(checkedItems),
                             updateSelectedItems(checkedItems),
                             updateSelectedRightItems(
                               rightItems[selectedLeftItem]
-                            ))
+                            ),
+                            (k = selectedWords[selectedLeftItem].filter(
+                              (w) => w !== item
+                            )),
+                            (words[selectedLeftItem] = k),
+                            updateSelectedWords(words),
+                            searchForWord())
                           : ((checkedItems[selectedLeftItem][index] = true),
                             updateSelectedRightItem(checkedItems),
                             updateSelectedItems(checkedItems),
                             updateSelectedRightItems(
                               rightItems[selectedLeftItem]
-                            ));
+                            ),
+                            words[selectedLeftItem].push(item),
+                            updateSelectedWords(words),
+                            searchForWord());
                       }}
                       id="checkedBox"
                       className=" accent-white"
@@ -201,7 +236,7 @@ function FilterContainer() {
             </div>
             <div className=" flex items-center ">
               <a className="rounded-lg text-white border w-fit h-fit px-4 py-2 bg-pink-600">
-                View 20 Items
+                {"View " + searchedItems.length + " Items"}
               </a>
             </div>
           </div>
