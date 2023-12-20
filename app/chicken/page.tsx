@@ -15,6 +15,7 @@ import chicken_main_items from "@/data/items/chicken/mainItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import Link from "next/link";
 import Product from "../product/page";
+import { Varela } from "next/font/google";
 
 export default function Chicken() {
   let [productData, updateProductData] = useState([]);
@@ -30,6 +31,7 @@ export default function Chicken() {
   let [bW, uBW] = useState([]);
   let [sI, uSI] = useState([]);
   let [sW, uSW] = useState([]);
+  
   let [selectedCount, updateSelectedCount] = useState(0);
   return (
     <>
@@ -49,6 +51,7 @@ export default function Chicken() {
             updateSelectedMainItem={updateSelectedMainItem}
             uSC={updateSelectedCount}
             sC={selectedCount}
+          
           />
         ) : null}
         <div>
@@ -90,7 +93,7 @@ function FilterContainer({
   uSW,
   updateSelectedMainItem,
   uSC,
-  sC,
+  sC
 }) {
   let leftItems = [
     "Delivery time",
@@ -173,6 +176,9 @@ function FilterContainer({
       : null;
   }, []);
   let [selectedWordsCount, updateSelectedWordsCount] = useState(0);
+  useEffect(()=>{
+    console.log(selectedWordsCount)
+  },[selectedWordsCount])
 
   return (
     <>
@@ -208,6 +214,7 @@ function FilterContainer({
                     >
                       {item}
                     </label>
+    
                   </div>
                 );
               })}
@@ -264,8 +271,10 @@ function FilterContainer({
           <div className="flex items-center w-[100vw] justify-evenly mb-2 h-fit py-2">
             <div
               onClick={() => {
+               
                 updateSelectedRightItem(clearFilters);
                 updateSearchedItems(chickenTotalItems);
+                updateSelectedWordsCount(0);
               }}
               className=" flex items-center "
             >
@@ -284,7 +293,9 @@ function FilterContainer({
                     ut(searchedItems),
                     uSW(selectedWords),
                     updateSelectedMainItem(0))
-                  : null;
+                  : (
+               null
+                  );
               }}
             >
               <a
@@ -563,7 +574,7 @@ function MenuSuBItems({
               <PiSlidersHorizontalBold />
             </a>
             <h2 className="text-md font-bold">Filters</h2>
-            <h3 className=" text-md font-bold text-red-500 ">{selectedCount !== 0 ? ("("+selectedCount+")") : null}</h3>
+            <h3 className=" text-md font-bold text-red-500 ">{selectedCount != 0 ? ("("+selectedCount+")") : null}</h3>
           </div>
         </div>
         <div className="p-4 space-y-4">

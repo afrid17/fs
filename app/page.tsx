@@ -1,5 +1,4 @@
 "use client";
-import allItems from "@/components/menu_page/allItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import HomeStructure from "@/page_structure/home";
 import MenuStructure from "@/page_structure/menu";
