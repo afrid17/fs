@@ -15,8 +15,6 @@ import chicken_main_items from "@/data/items/chicken/mainItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import Link from "next/link";
 import Product from "../product/page";
-import { Varela } from "next/font/google";
-
 export default function Chicken() {
   let [productData, updateProductData] = useState([]);
   let [productPage, updateProductPage] = useState(false);
@@ -31,7 +29,6 @@ export default function Chicken() {
   let [bW, uBW] = useState([]);
   let [sI, uSI] = useState([]);
   let [sW, uSW] = useState([]);
-  
   let [selectedCount, updateSelectedCount] = useState(0);
   return (
     <>
@@ -51,7 +48,6 @@ export default function Chicken() {
             updateSelectedMainItem={updateSelectedMainItem}
             uSC={updateSelectedCount}
             sC={selectedCount}
-          
           />
         ) : null}
         <div>
