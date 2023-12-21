@@ -1,9 +1,12 @@
 "use client";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
+import connectMongoDb from "@/libs/mongoDB";
+import connectDb from "@/libs/mongoDB";
+import main from "@/methods/main";
 import HomeStructure from "@/page_structure/home";
 import MenuStructure from "@/page_structure/menu";
 import ProductStructure from "@/page_structure/product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   let [selectedPage, updateSelectedPage] = useState(0);
@@ -22,6 +25,12 @@ export default function Home() {
   function updateProductData(data) {
     updateSelectedProductData(data);
   }
+  
+  useEffect(()=>{
+    main()
+
+
+  },[])
 
   return (
     <>

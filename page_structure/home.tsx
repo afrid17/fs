@@ -13,12 +13,9 @@ export default function HomeStructure({updatePage,updateProduct}) {
     updatePage(1)
   }
   return (
-    <main>
-      <div>
+   
         <div>
-          {/**
-           *
-           */}
+        
           <div className="p-6">
             <h2 className="font-bold text-xl">Shop By Categories</h2>
             <h4 className="text-lightGray text-md">
@@ -96,7 +93,5 @@ export default function HomeStructure({updatePage,updateProduct}) {
           </div>
         </div>
         </div>
-      </div>
-    </main>
   );
 }

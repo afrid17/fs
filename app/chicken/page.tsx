@@ -14,6 +14,8 @@ import chickenBannerImages from "@/data/items/chicken/bannerImages";
 import chicken_main_items from "@/data/items/chicken/mainItems";
 import chickenTotalItems from "@/data/items/chicken/totalItems";
 import Link from "next/link";
+import {CiShop} from 'react-icons/ci'
+import {AiFillThunderbolt} from 'react-icons/ai'
 import Product from "../product/page";
 export default function Chicken() {
   let [productData, updateProductData] = useState([]);
@@ -89,7 +91,7 @@ function FilterContainer({
   uSW,
   updateSelectedMainItem,
   uSC,
-  sC
+  sC,
 }) {
   let leftItems = [
     "Delivery time",
@@ -172,9 +174,9 @@ function FilterContainer({
       : null;
   }, []);
   let [selectedWordsCount, updateSelectedWordsCount] = useState(0);
-  useEffect(()=>{
-    console.log(selectedWordsCount)
-  },[selectedWordsCount])
+  useEffect(() => {
+    console.log(selectedWordsCount);
+  }, [selectedWordsCount]);
 
   return (
     <>
@@ -210,7 +212,6 @@ function FilterContainer({
                     >
                       {item}
                     </label>
-    
                   </div>
                 );
               })}
@@ -267,7 +268,6 @@ function FilterContainer({
           <div className="flex items-center w-[100vw] justify-evenly mb-2 h-fit py-2">
             <div
               onClick={() => {
-               
                 updateSelectedRightItem(clearFilters);
                 updateSearchedItems(chickenTotalItems);
                 updateSelectedWordsCount(0);
@@ -289,9 +289,7 @@ function FilterContainer({
                     ut(searchedItems),
                     uSW(selectedWords),
                     updateSelectedMainItem(0))
-                  : (
-               null
-                  );
+                  : null;
               }}
             >
               <a
@@ -570,7 +568,9 @@ function MenuSuBItems({
               <PiSlidersHorizontalBold />
             </a>
             <h2 className="text-md font-bold">Filters</h2>
-            <h3 className=" text-md font-bold text-red-500 ">{selectedCount != 0 ? ("("+selectedCount+")") : null}</h3>
+            <h3 className=" text-md font-bold text-red-500 ">
+              {selectedCount != 0 ? "(" + selectedCount + ")" : null}
+            </h3>
           </div>
         </div>
         <div className="p-4 space-y-4">
@@ -642,13 +642,23 @@ function ProductShowCase({
             </h2>
           </div>
           <div className="flex items-center justify-between ">
-            <div className="flex pt-4 space-x-2 items-center ">
-              <embed className=" w-6" src="expressDelivery.svg" />
-              <h2 className="text-sm text-gray-800">Today in 40 mins</h2>
+            <div>
+              <div className="flex pt-4 space-x-2 items-center ">
+                
+                <div className=" w-6 h-6 shadow-xl bg-yellow rounded-full flex justify-center items-center">
+                  <label className=" text-md text-white ">
+                    <AiFillThunderbolt/></label>
+                </div>
+                <h2 className="text-sm text-gray-800">Today in 40 mins</h2>
+              </div>
+              <div className="flex items-start justify-start pt-3 pb-1 pl-[2px] ">
+                <label className=" relative -top-[2px] text-xl pr-[2px]"><CiShop/></label>
+                <a className="  text-sm text-zinc-700">From 
+                <span className=" text-md text-blue-600 ml-2 border-blue-600 border-b">Fresh Slice</span></a>
+              </div>
             </div>
             <div className="flex space-x-2 items-center h-fit justify-center w-fit bg-redPink text-white px-3 rounded-md font-bold py-1">
               <h1>Add </h1>
-
               <a className="text-lg">
                 <MdAdd />
               </a>
